@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Artists' Collective — Studio (Usernode dApp)</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<!-- Usernode bridge: gives window.getNodeAddress / sendTransaction / getTransactions when
-     this runs inside the Usernode app. When opened standalone it's absent, and our adapter
-     below falls back to in-page mock data so the dApp is fully demoable on its own. -->
-<script src="usernode-bridge.js"></script>
+<!-- Usernode platform scripts: served at the SERVER ROOT by Usernode itself (NOT bundled in this
+     repo) so we always get the up-to-date bridge — per Evan's guidance. ?v=__BUILD_VERSION__ is
+     substituted by the Usernode build pipeline. Opened standalone (file://) these 404 and our
+     adapter below falls back to in-page mock data, so the dApp is still demoable on its own. -->
+<script src="/usernode-bridge.js?v=__BUILD_VERSION__"></script>
+<script src="/usernode-usernames.js?v=__BUILD_VERSION__"></script>
+<script src="/usernode-loading.js?v=__BUILD_VERSION__"></script>
+<script>try{ if(window.UsernodeLoading) UsernodeLoading.init({ appName:"The Artists' Collective", streamKey:"artists-collective" }); }catch(e){}</script>
+<meta name="x-app-version" content="__BUILD_VERSION__" />
 <style>
   :root{--paper:#fff;--paper-2:#ece6d9;--surface:#fff;--ink:#1d1b16;--ink-soft:#615c51;--line:#e4ded2;--accent:#8a3b2e;--ok:#2f6b4d;--radius:4px;--maxw:1080px;--shadow:0 22px 60px rgba(40,32,20,.14)}
   [data-theme="dark"]{--paper:#141310;--paper-2:#221f17;--surface:#1c1a14;--ink:#f0ebdd;--ink-soft:#a59d8b;--line:#322e22;--accent:#d98c5f;--ok:#74c79a;--shadow:0 22px 60px rgba(0,0,0,.55)}
